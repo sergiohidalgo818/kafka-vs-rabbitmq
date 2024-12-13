@@ -129,7 +129,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-venv_kafka_vs_rabbit/
+venv_kafka_vs_rabbitmq/
 
 # Spyder project settings
 .spyderproject

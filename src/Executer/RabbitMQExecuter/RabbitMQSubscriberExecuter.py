@@ -9,7 +9,6 @@ class RabbitMQSubscriberExecuter(Executer):
 
     def execute(self, queue: Queue):
         
-        super().execute(queue,)
 
         connection = pika.BlockingConnection(
             pika.ConnectionParameters(host='localhost'))
@@ -30,7 +29,7 @@ class RabbitMQSubscriberExecuter(Executer):
             if body.decode('UTF-8') == "$end":
                 exit()
     
-
+        super().execute(queue,)
 
         channel.basic_consume(
             queue=queue_name, on_message_callback=callback, auto_ack=True)

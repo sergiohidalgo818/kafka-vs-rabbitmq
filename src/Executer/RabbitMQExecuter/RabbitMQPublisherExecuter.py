@@ -15,7 +15,8 @@ class RabbitMQPublisherExecuter(Executer):
         channel.exchange_declare(exchange='topic_logs', exchange_type='topic')
        
         super().execute(queue,)
-        
+        channel.confirm_delivery()
+
         for msg in self.data:
             channel.basic_publish(exchange='topic_logs',
                               routing_key=self.topic, body=msg.encode('UTF-8'))
