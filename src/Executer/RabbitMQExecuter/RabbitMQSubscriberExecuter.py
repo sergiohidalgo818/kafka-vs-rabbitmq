@@ -24,7 +24,6 @@ class RabbitMQSubscriberExecuter(Executer):
                 exchange='topic_logs', queue=queue_name, routing_key=self.topic)
 
 
-
         def callback(ch, method, properties, body):
             if body.decode('UTF-8') == "$end":
                 exit()

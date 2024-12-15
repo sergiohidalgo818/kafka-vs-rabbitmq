@@ -3,7 +3,7 @@ from timeit import default_timer as timer
 from multiprocessing import Process, Queue
 import os
 import pandas
-
+import numpy as np
 
 def generate_list(size_msg: int = 1, size_list: int = 1, incremental: bool = False) -> list:
     if not incremental:
@@ -50,9 +50,17 @@ class Executer:
 
         self.separator = separator
         self.decimal = decimal
+        
 
         self.data_frame = pandas.DataFrame({'execution_num': [], 'num_execs': [], 'size_msg': [],
                                             'incremental': [], 'time': []})
+
+
+        self.data_frame['execution_num'] = self.data_frame['execution_num'].astype(np.int64)
+        self.data_frame['num_execs'] = self.data_frame['num_execs'].astype(np.int64)
+        self.data_frame['size_msg'] = self.data_frame['size_msg'].astype(np.int64)
+        self.data_frame['incremental'] = self.data_frame['incremental'].astype(np.bool)
+        self.data_frame['time'] = self.data_frame['time'].astype(np.float128)
 
     def execute(self, queue: Queue):
         queue.put(timer())
@@ -73,9 +81,9 @@ class Executer:
         self.write_data()
 
     def add_to_frame(self, execution_num: int):
-        aux_df = pandas.DataFrame({'execution_num': [int(execution_num)], 'num_execs': [int(self.num_execs)],
-                                   'size_msg': [int(self.size_msg)], 'incremental': [bool(self.incremental)],
-                                   'time': [float(self.end_time-self.start_time)]})
+        aux_df = pandas.DataFrame({'execution_num': [np.int64(execution_num)], 'num_execs': [np.int64(self.num_execs)],
+                                   'size_msg': [np.int64(self.size_msg)], 'incremental': [np.bool(self.incremental)],
+                                   'time': [np.float128(self.end_time-self.start_time)]})
 
         self.data_frame = pandas.concat(
             [self.data_frame, aux_df], ignore_index=True)

@@ -2,37 +2,48 @@ import argparse
 from Executer import KafkaExecuter
 from Executer import RabbitMQExecuter
 
+
 def main(execution: str,  message_size: int,
          iteration_size: int, incremental_message_size: bool,
-         number_iterations: int, data_directory:str):
+         number_iterations: int, data_directory: str, file_indicator: str,
+         separator: str, decimal: str):
 
     match execution:
         case 'kafka':
             kfk_exec = KafkaExecuter(size_msg=message_size, size_list=iteration_size,
-                          incremental=incremental_message_size, num_execs=number_iterations,
-                          directory_name=data_directory, file_name="KafkaExecuter.csv")
-            
+                                     incremental=incremental_message_size, num_execs=number_iterations,
+                                     directory_name=data_directory,
+                                     file_name=f"KafkaExecuter{file_indicator}.csv",
+                                     separator=separator, decimal=decimal)
+
             kfk_exec.iterate()
 
         case 'rabbitmq':
             rbmq_exec = RabbitMQExecuter(size_msg=message_size, size_list=iteration_size,
-                          incremental=incremental_message_size, num_execs=number_iterations,
-                          directory_name=data_directory, file_name="RabbitMQExecuter.csv")
-            
+                                         incremental=incremental_message_size, num_execs=number_iterations,
+                                         directory_name=data_directory,
+                                         file_name=f"RabbitMQExecuter{file_indicator}.csv",
+                                         separator=separator, decimal=decimal)
+
             rbmq_exec.iterate()
 
         case 'both':
             kfk_exec = KafkaExecuter(size_msg=message_size, size_list=iteration_size,
-                          incremental=incremental_message_size, num_execs=number_iterations,
-                          directory_name=data_directory, file_name="KafkaExecuter.csv")
-            
+                                     incremental=incremental_message_size, num_execs=number_iterations,
+                                     directory_name=data_directory,
+                                     file_name=f"KafkaExecuter{file_indicator}.csv",
+                                     separator=separator, decimal=decimal)
+
             kfk_exec.iterate()
-            
+
             rbmq_exec = RabbitMQExecuter(size_msg=message_size, size_list=iteration_size,
-                          incremental=incremental_message_size, num_execs=number_iterations,
-                          directory_name=data_directory, file_name="RabbitMQExecuter.csv")
-            
+                                         incremental=incremental_message_size, num_execs=number_iterations,
+                                         directory_name=data_directory,
+                                         file_name=f"RabbitMQExecuter{file_indicator}.csv",
+                                         separator=separator, decimal=decimal)
+
             rbmq_exec.iterate()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -57,14 +68,25 @@ if __name__ == "__main__":
                         default=100,
                         help='number of iterations for each execution')
 
-
     parser.add_argument('-dd', '--data-directory',
                         default="data/",
                         help='data directory')
-    
+
+    parser.add_argument('-fi', '--file-indicator',
+                        default="",
+                        help='extra indicator to file')
+
+    parser.add_argument('-s', '--separator',
+                        default=";",
+                        help='separator for the data csv')
+
+    parser.add_argument('-d', '--decimal',
+                        default=".",
+                        help='decimal for the data csv')
 
     args = parser.parse_args()
 
-    main(execution=args.execution,  message_size=args.message_size,
-         iteration_size=args.iteration_size, incremental_message_size=args.incremental_message_size,
-         number_iterations=args.number_iterations, data_directory=args.data_directory)
+    main(execution=args.execution,  message_size=int(args.message_size),
+         iteration_size=int(args.iteration_size), incremental_message_size=bool(args.incremental_message_size),
+         number_iterations=int(args.number_iterations), data_directory=args.data_directory,
+         file_indicator=args.file_indicator, separator=args.separator,decimal=args.decimal)

@@ -12,7 +12,6 @@ class KafkaSubscriberExecuter(Executer):
         
         super().execute(queue,)
 
-        while True:
-            msg = consumer.next_v1()
+        for msg in consumer:
             if msg.value.decode('UTF-8') == "$end":
                 break

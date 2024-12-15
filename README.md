@@ -122,9 +122,21 @@ For removing the containers:
 docker compose down
 ``` 
 
+## Execution
+
+Be ensure to do all the installation steps and type the following command:
+
+```bash
+make
+```
+
+The performance executions and graphs will be executed.
+
+
 ## Procedure
 
 
+## Results
 
+## Proyect structure
 
-## Procedure
