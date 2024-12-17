@@ -14,7 +14,7 @@ Performance comparison between the two data-streaming platforms.
         - [RabbitMQ image instalation and run](#rabbitmq-image-instalation-and-run)
         - [Kafka testing](#rabbitmq-testing)
         - [Kafka deleting](#rabbitmq-deleting)
-    - [Using compose](#using-compose)
+    - [Docker compose](#docker-compose)
 - [Execution](#execution)
 - [Procedure](#procedure)
     - [Program structure](#program-structure)
@@ -28,7 +28,9 @@ Performance comparison between the two data-streaming platforms.
 - [Proyect structure](#proyect-structure)
 
 ## Instalation and quick start
-Here is explained step by step the installation of kafka and rabbitmq for Arch Linux with Docker.
+Here is explained step by step the installation of *Kafka* and *RabbitMQ* for **Arch Linux** with Docker.
+
+*Note*: You only really need to install [docker](#docker) and then run the [docker compose](#docker-compose) to have both *Kafka* and *RabbitMQ* ready to use. Alternativlely, when you run [make](#execution), the docker images is also downloaded and the containers started.
 
 ### Docker
 The following steps are subtracted from the [arch linux instalation guide](https://docs.docker.com/desktop/setup/install/linux/archlinux/) on the Docker docs.
@@ -135,7 +137,7 @@ Like Kafka, for deleting the container type:
 docker rm -f rabbitmq-broker
 ```
 
-### Using compose
+### Docker compose
 
 On the base directory, execute the following command:
 ```bash
@@ -152,7 +154,7 @@ docker compose down
 
 ## Execution
 
-Be ensure to do all the [docker](#docker) installation steps and the python modules inside *"requirements.txt"*. Then type the following command:
+Be ensure to do all the [docker](#docker) installation steps and to have installed the python modules inside *"requirements.txt"*. Then type the following command:
 
 ```bash
 make
