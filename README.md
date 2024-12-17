@@ -190,7 +190,7 @@ The only two parameters that are needed to clarify (because of their similitud) 
 :-------------------------:|:-------------------------:
 ![General incremental](graphs/general_execution_incremental.png "General incremental")  |  ![General non incremental](graphs/general_execution_not_incremental.png "General non incremental")
 
-As it can be seen on the graphs (specialy on the incremental), there is some critical points, in wich *Kafka* increments the time of execution. This is probably due to *Kafka*'s topics partitioned nature. This critical parts are probably moments where *Kafka* is allocating more memory in the partition of the topic because the messages are longer. 
+As it can be seen on the graphs (specialy on the incremental), there is some critical points, in wich *Kafka* increments the time of execution. This is probably due to *Kafka*'s topics partitioned nature. This critical parts are probably moments where *Kafka* is allocating more memory in the partition of the topic (or creating new partitions for that same topic) because the messages are longer. 
 
 ### Publisher
 |||
@@ -211,7 +211,7 @@ Given the results of the subscriber, the theory of the partitions memory allocat
 
 ### Conclusions
 
-While *Kafka* has a better improvement in big messages, *RabbitMQ* have the advantage that there is no allocation needed, so it doesn't have that penalization at the first iterations. On the other hand, *RabbitMQ*'s queue could be a drawback when the message is to big.
+While *Kafka* has a better improvement in big messages, *RabbitMQ* have the advantage that there is no partition allocation needed, so it doesn't have that penalization at the first iterations. On the other hand, *RabbitMQ*'s queue could be a drawback when the message is to big.
 
 Having this in mind, for short messages that doesn't require persistence (such as social media notifications) *RabbitMQ* could be a much more interesting choice. But in paradigms that are big data related or need that the time of publishing-consuming stays mostly the same, without being affected, *Kafka* it's the better choice.
 
