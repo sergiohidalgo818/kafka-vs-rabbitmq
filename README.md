@@ -1,5 +1,5 @@
 # Kafka vs RabbitMQ
-Performance comparison between the two data-streaming platforms-
+Performance comparison between the two data-streaming platforms.
 
 - [Instalation and quick start](#instalation-and-quick-start)
     - [Docker](#docker)
