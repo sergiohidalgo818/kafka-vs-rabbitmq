@@ -152,13 +152,13 @@ docker compose down
 
 ## Execution
 
-Be ensure to do all the installation steps and type the following command:
+Be ensure to do all the [docker](#docker) installation steps and the python modules inside *"requirements.txt"*. Then type the following command:
 
 ```bash
 make
 ```
 
-The performance executions and graphs will be executed.
+The performance measures executions and graphs will be executed.
 
 
 ## Procedure
