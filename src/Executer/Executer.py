@@ -5,18 +5,6 @@ import os
 import pandas
 import numpy as np
 
-def generate_list(size_msg: int = 1, size_list: int = 1, incremental: bool = False) -> list:
-    if not incremental:
-        list_to_ret = [''.join([str(i) for i in range(size_msg)])
-                       for _ in range(size_list)]
-
-    else:
-        list_to_ret = [''.join([str(i) for i in range(max(
-            int(size_msg*list_index/size_list), 1))]) for list_index in range(1, size_list+1)]
-
-    list_to_ret.append("$end")
-    return list_to_ret
-
 
 class Executer:
 
@@ -36,8 +24,6 @@ class Executer:
     def __init__(self, size_msg: int = 1, size_list: int = 1, incremental: bool = False,
                  num_execs: int = 10, directory_name: str = "", file_name: str = "",
                  topic: str = "example-topic", separator: str = ";", decimal: str = "."):
-
-        self.data = generate_list(size_msg, size_list, incremental)
 
         self.size_msg = size_msg
         self.size_list = size_list
@@ -103,3 +89,18 @@ class Executer:
 
         self.data_frame.to_csv(
             self.directory_name+self.file_name, sep=self.separator, decimal=self.decimal, index=False)
+
+
+
+    def generate_data(self):
+        if not self.incremental:
+            list_to_ret = [''.join([str(i) for i in range(self.size_msg)])
+                        for _ in range(self.size_list)]
+
+        else:
+            list_to_ret = [''.join([str(i) for i in range(max(
+                int(self.size_msg*list_index/self.size_list), 1))]) for list_index in range(1, self.size_list+1)]
+
+        list_to_ret.append("$end")
+        
+        self.data= list_to_ret

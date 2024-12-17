@@ -1,8 +1,6 @@
 
 from timeit import default_timer as timer
 from multiprocessing import Process, Queue
-import os
-import pandas
 from Executer import Executer
 
 
@@ -17,6 +15,9 @@ class MainExecuter(Executer):
         
         self.subscriber = subscriber
         self.publisher = publisher
+
+
+        publisher.generate_data()
 
     def iterate(self):
 
