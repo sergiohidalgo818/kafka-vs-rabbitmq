@@ -25,7 +25,7 @@ Performance comparison between the two data-streaming platforms.
     - [Publisher](#publisher)
     - [Subscriber](#subscriber)
     - [Conclusions](#conclusions)
-- [Proyect structure](#proyect-structure)
+- [Project structure](#project-structure)
 
 ## Instalation and quick start
 Here is explained step by step the installation of *Kafka* and *RabbitMQ* for **Arch Linux** with Docker.
@@ -216,7 +216,7 @@ While *Kafka* has a better improvement in big messages, *RabbitMQ* have the adva
 Having this in mind, for short messages that doesn't require persistence (such as social media notifications) *RabbitMQ* could be a much more interesting choice. But in paradigms that are big data related or need that the time of publishing-consuming stays mostly the same, without being affected, *Kafka* it's the better choice.
 
 
-## Proyect structure
+## Project structure
 
 ```bash
 ├── data
